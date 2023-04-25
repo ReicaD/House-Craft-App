@@ -1,10 +1,27 @@
-import './App.css';
+import { Routes, Router, Route } from "react-router-dom";
+import "./App.css";
+import Explore from "./Pages/Explore";
+import ForgotPassword from "./Pages/ForgotPassword";
+import Offers from "./Pages/Offers";
+import Profile from "./Pages/Profile";
+import SignIn from "./Pages/SignIn";
+import SignUp from "./Pages/SignUp";
 
 function App() {
   return (
-    <div>
-      <h1>My house Craft App</h1>
-    </div>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Explore />} />
+          <Route path="/offers" element={<Offers />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+        </Routes>
+      </Router>
+      {/* Navbar */}
+    </>
   );
 }
 
