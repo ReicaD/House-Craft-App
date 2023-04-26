@@ -10,7 +10,7 @@ import SignUp from "./Pages/SignUp";
 function App() {
   return (
     <>
-      <h1>niki</h1>
+      <h1 style={{background: "#EEE8AA", color: "black"}}>House Craft App!</h1>
       <Router>
         <Routes>
           <Route path="/" element={<Explore />} />
