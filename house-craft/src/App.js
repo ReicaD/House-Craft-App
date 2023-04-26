@@ -1,5 +1,5 @@
-import { Routes, Router, Route } from "react-router-dom";
-import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+ import Navbar from "./components/Navbar"
 import Explore from "./Pages/Explore";
 import ForgotPassword from "./Pages/ForgotPassword";
 import Offers from "./Pages/Offers";
@@ -10,6 +10,7 @@ import SignUp from "./Pages/SignUp";
 function App() {
   return (
     <>
+      <h1>niki</h1>
       <Router>
         <Routes>
           <Route path="/" element={<Explore />} />
@@ -19,7 +20,9 @@ function App() {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
         </Routes>
+        <Navbar/>
       </Router>
+
       {/* Navbar */}
     </>
   );
