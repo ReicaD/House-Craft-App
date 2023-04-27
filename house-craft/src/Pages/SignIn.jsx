@@ -49,13 +49,14 @@ function SignIn() {
             />
           </div>
           <Link to="/forgot-password" className="forgotPasswordLink">
-            Trouble signing in?</Link>
-            <div className="signInBar">
-              <p className="signIn Text">
-                Sign In
-              </p>
-              <button className="signInButton"></button>
-            </div>
+            Trouble signing in?
+          </Link>
+          <div className="signInBar">
+            <p className="signIn Text">Sign In</p>
+            <button className="signInButton">
+              <ArrowRightIcon fill="#ffffff" width="34px" height="34px" />
+            </button>
+          </div>
         </form>
       </div>
     </>
