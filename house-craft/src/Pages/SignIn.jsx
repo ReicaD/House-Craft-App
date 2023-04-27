@@ -42,7 +42,7 @@ function SignIn() {
               onChange={onChange}
             />
             <img
-              src={visibilityIcon}
+              src={visibiltyIcon}
               alt="show password"
               className="showPassword"
               onClick={() => setShowPassword((prevState) => !prevState)}
