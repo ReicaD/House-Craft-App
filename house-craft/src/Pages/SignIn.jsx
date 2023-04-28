@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { RecatComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
+import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
 import visibiltyIcon from "../assets/svg/visibilityIcon.svg";
 
 function SignIn() {
@@ -13,8 +13,16 @@ function SignIn() {
   const { email, password } = formData;
   const navigate = useNavigate();
 
+
   //this will define the OnChange in our input below see (line 32)
-  const onChange = () => {};
+  const onChange = (e) => {
+    // this allows either password or email IDs to be displayed 
+    setFormData((prevState)=>({
+    ...prevState,
+    [e.target.id]:e.target.value
+    }))
+  };
+
   return (
     <>
       <div className="pageContainer">
@@ -48,6 +56,7 @@ function SignIn() {
               onClick={() => setShowPassword((prevState) => !prevState)}
             />
           </div>
+          {/* this will link to the forgot password route see App.js (line 20) */}
           <Link to="/forgot-password" className="forgotPasswordLink">
             Trouble signing in?
           </Link>
@@ -58,6 +67,10 @@ function SignIn() {
             </button>
           </div>
         </form>
+        {/* Google OAuth */}
+        <Link to="/sign-up" className="registerLink">
+          Sign-Up Here!
+        </Link>
       </div>
     </>
   );
