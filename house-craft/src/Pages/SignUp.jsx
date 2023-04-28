@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {db} from "../firebase.config"
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
 import visibiltyIcon from "../assets/svg/visibilityIcon.svg";
 
@@ -7,13 +9,12 @@ function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
+    name:"",
     email: "",
     password: "",
   });
-  const { email, password } = formData;
+  const {name, email, password } = formData;
   const navigate = useNavigate();
-
-
   //this will define the OnChange in our input below see (line 32)
   const onChange = (e) => {
     // this allows either password or email IDs to be displayed 
@@ -22,7 +23,23 @@ function SignUp() {
     [e.target.id]:e.target.value
     }))
   };
-
+const onSubmit=async (e)=>{
+  e.preventDefault()
+  //getting the Auth and registering the user using promises
+  try {
+    const  auth =getAuth()
+    const  userCredential = await createUserWithEmailAndPassword(auth,email,password)
+    //getting the user infomation
+    const user = userCredential.user
+    updateProfile(auth.currentUser,{
+      displayName:name
+    })
+    //redirecting
+    navigate("/")
+  } catch (error) {
+    console.log(error);
+  }
+}
   return (
     <>
       <div className="pageContainer">
@@ -30,7 +47,15 @@ function SignUp() {
           <p className="pageHeader">Welcome back! We missed you.</p>
         </header>
         {/* this shows the value is going to be the email that we destructured from state*/}
-        <form>
+        <form onSubmit={}>
+          <input
+            type="text"
+            className="nameInput"
+            placeholder="Name"
+            id="name"
+            value={name}
+            onChange={onChange}
+          />
           <input
             type="email"
             className="emailInput"
@@ -61,7 +86,7 @@ function SignUp() {
             Trouble signing in?
           </Link>
           <div className="signUpBar">
-            <p className="signUp Text">Sign In</p>
+            <p className="signUp Text">Sign Up</p>
             <button className="signUpButton">
               <ArrowRightIcon fill="#ffffff" width="34px" height="34px" />
             </button>
@@ -69,7 +94,7 @@ function SignUp() {
         </form>
         {/* Google OAuth */}
         <Link to="/sign" className="registerLink">
-          Sign-Up Here!
+          Sign In Here!
         </Link>
       </div>
     </>
