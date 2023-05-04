@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
+import {setDoc , doc, serverTimestamp} from "firebase/firestore"
 import {db} from "../firebase.config"
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
 import visibiltyIcon from "../assets/svg/visibilityIcon.svg";
@@ -32,8 +33,14 @@ const onSubmit=async (e)=>{
     //getting the user infomation
     const user = userCredential.user
     updateProfile(auth.currentUser,{
-      displayName:name
+      displayName:name,
     })
+//this will submit once its added then the server timestamp will get added
+    const formDataCopy ={...formData}
+    delete formDataCopy.password 
+    formDataCopy.timestamp = serverTimestamp()
+   await setDoc(doc(db,"users",user.uid),formData)
+
     //redirecting
     navigate("/")
   } catch (error) {
@@ -47,7 +54,7 @@ const onSubmit=async (e)=>{
           <p className="pageHeader">Welcome back! We missed you.</p>
         </header>
         {/* this shows the value is going to be the email that we destructured from state*/}
-        <form onSubmit={}>
+        <form onSubmit={onSubmit}>
           <input
             type="text"
             className="nameInput"
@@ -93,7 +100,7 @@ const onSubmit=async (e)=>{
           </div>
         </form>
         {/* Google OAuth */}
-        <Link to="/sign" className="registerLink">
+        <Link to="/sign-in" className="registerLink">
           Sign In Here!
         </Link>
       </div>

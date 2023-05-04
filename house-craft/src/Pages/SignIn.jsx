@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
 import visibiltyIcon from "../assets/svg/visibilityIcon.svg";
 
@@ -13,16 +14,17 @@ function SignIn() {
   const { email, password } = formData;
   const navigate = useNavigate();
 
-
   //this will define the OnChange in our input below see (line 32)
   const onChange = (e) => {
-    // this allows either password or email IDs to be displayed 
-    setFormData((prevState)=>({
-    ...prevState,
-    [e.target.id]:e.target.value
-    }))
+    // this allows either password or email IDs to be displayed
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.id]: e.target.value,
+    }));
   };
-
+const onSubmit = async (e) =>{
+  e.preventDefault()
+}
   return (
     <>
       <div className="pageContainer">
@@ -30,7 +32,7 @@ function SignIn() {
           <p className="pageHeader">Welcome back! We missed you.</p>
         </header>
         {/* this shows the value is going to be the email that we destructured from state*/}
-        <form>
+        <form onSubmit={onSubmit}>
           <input
             type="email"
             className="emailInput"
