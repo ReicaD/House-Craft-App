@@ -22,9 +22,23 @@ function SignIn() {
       [e.target.id]: e.target.value,
     }));
   };
-const onSubmit = async (e) =>{
-  e.preventDefault()
-}
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      if (userCredential.user) {
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <div className="pageContainer">

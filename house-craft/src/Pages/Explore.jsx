@@ -1,8 +1,16 @@
-import React from 'react'
+import { useEffect} from 'react'
+import {getAuth} from "firebase/auth"
 
 function Explore() {
+  const auth = getAuth()
+useEffect(()=>{
+ console.log(auth.currentUser);
+},[])
+
+
+
   return (
-    <div>Explore</div>
+    <h1>Explore</h1>
   )
 }
 
