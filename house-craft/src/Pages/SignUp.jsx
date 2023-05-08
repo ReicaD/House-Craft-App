@@ -41,7 +41,7 @@ function SignUp() {
       //getting the user infomation
       const user = userCredential.user;
       updateProfile(auth.currentUser, {
-        // displayName: name,
+       displayName: name,
       });
       //this will submit once its added then the server timestamp will get added
       const formDataCopy = { ...formData };
