@@ -7,7 +7,7 @@ function NavBar() {
   //the hook below will help navigate around the navbar footer
   const navigate = useNavigate();
   const location = useLocation();
-
+  
   const pathMatchRoute = (route) => {
     if (route === location.pathname) {
       return true;
@@ -27,12 +27,12 @@ function NavBar() {
             <p
               className={
                 pathMatchRoute("/")
-                ?"navBarListItemNameActive"
-                : "navbarListItem"
-                }
+                  ? "navBarListItemNameActive"
+                  : "navbarListItem"
+              }
             >
               Explore
-            </p  >
+            </p>
           </li>
           <li className="navbarListItem" onClick={() => navigate("/offers")}>
             <OfferIcon
@@ -40,11 +40,15 @@ function NavBar() {
               with="36px"
               height="36px"
             />
-            <p className={
+            <p
+              className={
                 pathMatchRoute("/offers")
-                ?"navBarListItemNameActive"
-                : "navbarListItem"
-                }>Offers</p>
+                  ? "navBarListItemNameActive"
+                  : "navbarListItem"
+              }
+            >
+              Offers
+            </p>
           </li>
           <li className="navbarListItem" onClick={() => navigate("/profile")}>
             <PersonOutlineIcon
@@ -52,11 +56,15 @@ function NavBar() {
               with="36px"
               height="36px"
             />
-            <p className={
+            <p
+              className={
                 pathMatchRoute("/profile")
-                ?"navBarListItemNameActive"
-                : "navbarListItem"
-                }>Profile</p>
+                  ? "navBarListItemNameActive"
+                  : "navbarListItem"
+              }
+            >
+              Profile
+            </p>
           </li>
         </ul>
       </div>

@@ -5,6 +5,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   updateProfile,
+  fetchSignInMethodsForEmail,
 } from "firebase/auth";
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase.config";
@@ -38,17 +39,21 @@ function SignUp() {
         email,
         password
       );
+      // console.log("email ==>", userCredential.user.email);
+      // console.log("user ==>", auth);
       //getting the user infomation
       const user = userCredential.user;
+      console.log("user ===>", user);
       updateProfile(auth.currentUser, {
-       displayName: name,
+        displayName: name,
       });
+
       //this will submit once its added then the server timestamp will get added
       const formDataCopy = { ...formData };
       delete formDataCopy.password;
       formDataCopy.timestamp = serverTimestamp();
       await setDoc(doc(db, "users", user.uid), formData);
-
+      // console.log("this is data",data);
       //redirecting
       navigate("/");
     } catch (error) {
