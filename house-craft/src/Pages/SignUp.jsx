@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import {
   getAuth,
   createUserWithEmailAndPassword,
   updateProfile,
   fetchSignInMethodsForEmail,
 } from "firebase/auth";
+import OAuth from "../components/OAuth";
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
@@ -55,9 +57,12 @@ function SignUp() {
       await setDoc(doc(db, "users", user.uid), formData);
       // console.log("this is data",data);
       //redirecting
-      navigate("/");
+      if (user) {
+        // console.log("You're logged in")
+        Navigate("/profile");
+      }
     } catch (error) {
-      toast.error("Bad user Credentials");
+      toast.error("Bad User Credentials");
     }
   };
   return (
@@ -112,7 +117,7 @@ function SignUp() {
             </button>
           </div>
         </form>
-        {/* Google OAuth */}
+        <OAuth/>
         <Link to="/sign-in" className="registerLink">
           Sign In Here!
         </Link>
