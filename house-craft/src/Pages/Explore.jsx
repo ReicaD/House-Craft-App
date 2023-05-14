@@ -1,17 +1,13 @@
-import { useEffect} from 'react'
+import { useEffect} from 'react-router-dom'
 import {getAuth} from "firebase/auth"
 
 function Explore() {
-  const auth = getAuth()
-useEffect(()=>{
- console.log(auth.currentUser);
-},[])
+  
 
 
-
-  return (
-    <h1>Explore</h1>
-  )
+  return 
+   
+  
 }
 
 export default Explore

@@ -118,9 +118,10 @@ function SignUp() {
           </div>
         </form>
         <OAuth/>
-        <Link to="/sign-in" className="registerLink">
+          <Link to="/sign-in" className="registerLink">
           Sign In Here!
         </Link>
+           
       </div>
     </>
   );

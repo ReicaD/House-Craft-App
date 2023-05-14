@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { Link, useNavigate,Navigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import OAuth from "../components/OAuth";
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
@@ -79,13 +79,15 @@ function SignIn() {
             Trouble signing in?
           </Link>
           <div className="signInBar">
-            <p className="signIn Text">Sign In</p>
+            <strong>
+              <p className="signIn Text">Sign In</p>
+            </strong>
             <button className="signInButton">
               <ArrowRightIcon fill="#ffffff" width="34px" height="34px" />
             </button>
           </div>
         </form>
-        <OAuth/> 
+        <OAuth />
         <Link to="/sign-up" className="registerLink">
           Sign-Up Here!
         </Link>
