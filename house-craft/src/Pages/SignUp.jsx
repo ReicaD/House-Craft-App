@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
-import { Navigate } from "react-router-dom";
+// import { Navigate } from "react-router-dom";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -41,8 +41,8 @@ function SignUp() {
         email,
         password
       );
-      // console.log("email ==>", userCredential.user.email);
-      // console.log("user ==>", auth);
+       console.log("email ==>", userCredential.user.email);
+       console.log("auth ==>", auth);
       //getting the user infomation
       const user = userCredential.user;
       console.log("user ===>", user);
@@ -58,10 +58,11 @@ function SignUp() {
       // console.log("this is data",data);
       //redirecting
       if (user) {
-        // console.log("You're logged in")
-        Navigate("/profile");
+        console.log("You're logged in")
+        navigate("/profile");
       }
     } catch (error) {
+      console.log(error.message);
       toast.error("Bad User Credentials");
     }
   };
