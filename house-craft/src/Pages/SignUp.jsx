@@ -41,11 +41,11 @@ function SignUp() {
         email,
         password
       );
-       console.log("email ==>", userCredential.user.email);
-       console.log("auth ==>", auth);
+      //  console.log("email ==>", userCredential.user.email);
+      //  console.log("auth ==>", auth);
       //getting the user infomation
       const user = userCredential.user;
-      console.log("user ===>", user);
+      // console.log("user ===>", user);
       updateProfile(auth.currentUser, {
         displayName: name,
       });
