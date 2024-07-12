@@ -7,7 +7,7 @@ function NavBar() {
   //the hook below will help navigate around the navbar footer
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   const pathMatchRoute = (route) => {
     if (route === location.pathname) {
       return true;

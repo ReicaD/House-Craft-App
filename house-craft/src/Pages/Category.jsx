@@ -7,11 +7,12 @@ import {
   where,
   orderBy,
   limit,
-  getDocs
+  getDocs,
 } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
+import ListingItem from "../components/ListingItem";
 
 function Category() {
   const [listings, setListings] = useState(null);
@@ -36,7 +37,7 @@ function Category() {
         const listings = [];
         querySnap.forEach((doc) => {
           listings.push({
-            id: doc.id,
+            id: doc.name,
             data: doc.data(),
           });
         });
@@ -56,7 +57,9 @@ function Category() {
     <div className="category">
       <header>
         <p className="pageHeader">
-          {params.categoryName === "rent" ? "Places for Rent" : "Places for Sale"}
+          {params.categoryName === "rent"
+            ? "Places for Rent"
+            : "Places for Sale"}
         </p>
       </header>
       {loading ? (
@@ -66,146 +69,20 @@ function Category() {
           <main>
             <ul className="categoryListings">
               {listings.map((listing) => (
-                <h3 key={listing.id}>{listing.data.name}</h3>
+                <ListingItem
+                  listing={listing.data}
+                  id={listing.id}
+                  key={listing.id}
+                />
               ))}
             </ul>
           </main>
         </>
       ) : (
-        <p>No Listings for {params.categoryName}</p>
+        <p>Condos {params.categoryName}</p>
       )}
     </div>
   );
 }
 
 export default Category;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React from "react";
-// import { useState, useEffect } from "react";
-// import { useParams } from "react-router-dom";
-// import {
-//   collection,
-//   query,
-//   where,
-//   orderBy,
-//   limit,
-//   startAfter,
-//   doc,
-//   getDocs,
-//   onSnapshot,
-// } from "firebase/firestore";
-// import { db } from "../firebase.config";
-// import { toast } from "react-toastify";
-// import Spinner from "../components/Spinner";
-// // import spinner from "../components/Spinner";
-
-// function Category() {
-//   const [listings, setListings] = useState(null);
-//   const [loading, setLoading] = useState(true);
-
-//   const params = useParams();
-//   useEffect(() => {
-//     // console.log('this is p',params);
-//     const fetchListings = async () => {
-//       //this is to get reference by using collection
-//       try {
-//         const listingsRef = collection(db, "listings");
-//         console.log("=>", listingsRef);
-//         //getting the query by adding params.categoryName (categoryname will be fetched see app.js line:22)
-//         const q = query(
-//           listingsRef,
-//           where("type", "==", params.categoryName),
-//           orderBy("timestamp", "asc"),
-//           limit(10)
-//         );
-//         console.log("query", q);
-//         //excute query which will get the doc for the query
-//         const querySnap = await getDocs(q);
-//         // console.log("QS", querySnap);
-//         // console.log('querySnap',querySnap);
-//         const listings = [];
-//         querySnap.forEach((doc) => {
-//           // console.log("doc", doc.data);
-//           return listings.push({
-//             id: doc.id,
-//             data: doc.data(),
-//           });
-//         });
-//         console.log("listings", listings);
-
-//         setListings(listings);
-//         // console.log("listings", listings);
-//       } catch (error) {
-//         toast.error("meek mill");
-//         // console.log(error);
-//       }
-//     };
-//     fetchListings();
-//   }, []);
-
-//   return (
-//     <div className="category">
-//       <header>
-//         <p className="pageHeader">
-//           {params.categoryName === "rent"
-//             ? "places for  rent"
-//             : "places for sale "}
-//         </p>
-//       </header>
-//       {!loading ? (
-//         <Spinner />
-//       ) : listings && listings.length > 0 ? (
-//         <>
-//           <main>
-//             <ul className="categoryListings">
-//               {listings.map((listing) => (
-//                 <h3 key={listing.id}>{listing.data.name}</h3>
-//               ))}
-//             </ul>
-//           </main>
-//         </>
-//       ) : (
-//         <p> No Listing for {params.categoryName} </p>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default Category;
